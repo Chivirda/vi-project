@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+{% block title %}Добавление пассажира{% endblock %}
+
+{% block body %}
+    <h1 class="h1 text-uppercase text-center">Добавление пассажира</h1>
+    {{ form(form) }}
+{% endblock %}

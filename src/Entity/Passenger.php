@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\DTO\PassengerDTO;
 use App\Repository\PassengerRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -49,9 +50,23 @@ class Passenger
      */
     private $tickets;
 
-    public function __construct()
+    public function __construct(string $name, string $lastName, string $patronymic = null, int $passportSeries, int $passportNumber)
     {
+        $this->name = $name;
+        $this->lastName = $lastName;
+        $this->patronymic = $patronymic;
+        $this->passportSeries = $passportSeries;
+        $this->passportNumber = $passportNumber;
         $this->tickets = new ArrayCollection();
+    }
+
+    public static function createFromDTO(PassengerDTO $passengerDTO): self
+    {
+        return new self($passengerDTO->getName(),
+                        $passengerDTO->getLastName(),
+                        $passengerDTO->getPatronymic(),
+                        $passengerDTO->getPassportSeries(),
+                        $passengerDTO->getPassportNumber());
     }
 
     public function getId(): ?int
