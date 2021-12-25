@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\DTO\TicketDTO;
 use App\Repository\TicketRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -44,6 +45,24 @@ class Ticket
      * @ORM\JoinColumn(nullable=false)
      */
     private $bookingStatus;
+
+    public function __construct(?Flight $flight, ?Passenger $passenger,?\DateTimeInterface $departureDate, ?int $totalPrice, ?BookingStatus $bookingStatus)
+    {
+        $this->flight = $flight;
+        $this->passenger = $passenger;
+        $this->departureDate = $departureDate;
+        $this->totalPrice = $totalPrice;
+        $this->bookingStatus = $bookingStatus;
+    }
+
+    public static function createFromDTO(TicketDTO $ticketDTO): self
+    {
+        return new self($ticketDTO->getFlight(),
+                        $ticketDTO->getPassenger(),
+                        $ticketDTO->getDepartureDate(),
+                        $ticketDTO->getTotalPrice(),
+                        $ticketDTO->getBookingStatus());
+    }
 
     public function getId(): ?int
     {

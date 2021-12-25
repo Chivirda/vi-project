@@ -14,7 +14,10 @@
 </head>
 <body>
     <div class="container">
-        {% block body %}{% endblock %}
+        {% block body %}
+            <h1 class="h1 text-uppercase text-center fs-3 fw-bold">Бронирование билета</h1>
+            {{ form(form) }}
+        {% endblock %}
     </div>
 </body>
 
