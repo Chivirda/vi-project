@@ -1,9 +1,27 @@
 {% extends 'base.html.twig' %}
-{% form_theme form 'bootstrap_5_layout.html.twig' %}
 
 {% block title %}Добавление пассажира{% endblock %}
 
 {% block body %}
-    <h1 class="h1 text-uppercase text-center">Добавление пассажира</h1>
-    {{ form(form) }}
+    <h1 class="h1 text-uppercase text-center fs-3 fw-bold">Добавление пассажира</h1>
+
+    <div class="card bg-light bg-gradient align-middle">
+        <div class="card-body">
+            {{ form_start(form) }}
+                <div class="flex-column col">
+                    <span class="fw-bold fs-5">Пассажир</span>
+                    {{ form_row(form.lastName) }}
+                    {{ form_row(form.name) }}
+                    {{ form_row(form.patronymic) }}
+                </div>
+                <div class="flex-column col">
+                    <span class="fw-bold fs-5">Паспорт</span>
+                    {{ form_row(form.passportSeries) }}
+                    {{ form_row(form.passportNumber) }}
+                    {{ form_row(form.save) }}
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+
 {% endblock %}

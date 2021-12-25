@@ -20,7 +20,7 @@ class Flight
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=6)
+     * @ORM\Column(type="string", length=10)
      */
     private $number;
 

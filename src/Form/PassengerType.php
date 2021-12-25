@@ -5,20 +5,24 @@ namespace App\Form;
 use App\DTO\PassengerDTO;
 use App\Entity\Passenger;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PassengerType extends AbstractType
 {
+    private const BG_COLOR_CLASS = 'bg-light bg-gradient';
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('lastName')
-            ->add('patronymic')
-            ->add('passportSeries')
-            ->add('passportNumber')
+            ->add('lastName', TextType::class, ['label' => 'Фамилия'])
+            ->add('name', TextType::class, ['label' => 'Имя'])
+            ->add('patronymic', TextType::class, ['label' => 'Отчество (при наличии)'])
+            ->add('passportSeries', NumberType::class, ['label' => 'Серия'])
+            ->add('passportNumber', NumberType::class, ['label' => 'Номер'])
             ->add('save', SubmitType::class, ['label' => 'Добавить пассажира'])
         ;
     }
@@ -27,6 +31,7 @@ class PassengerType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => PassengerDTO::class,
+            'attr' => ['class' => 'd-flex justify-content-evenly row g-5']
         ]);
     }
 }
